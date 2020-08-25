@@ -14,19 +14,17 @@ import Clarifai from 'clarifai';
 
 const app = new Clarifai.App({apiKey: '19393ff85acd45508c5f54370215afca'});
 
-const particlesOptions = {
-  particles: {
-    line_linked: {
-      numeber: {
-        value: 30,
-        density:{
-          enable: true,
-          value_area: 800
-        }
-      }
-    }
-  }
- }
+const particlesOptions = 
+  {
+	    "particles": {
+	        "number": {
+	            "value": 150
+	        },
+	        "size": {
+	            "value": 4  
+	        }
+	    }
+	}
 
 class App extends Component {
   constructor() {
