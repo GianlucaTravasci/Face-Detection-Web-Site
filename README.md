@@ -14,9 +14,15 @@ Node.js and Express.js
 ### NPM Packages:
 
 Create-React-App: for a template of a react app 
+
 Tachyons: for styling the application
+
 react-tilt: for the awesome logo css of the page
+
 particles.js: for the awesome backgroung
+
 Bcrypt: for encrypt the passwords stored in the database
+
 knex: for connect the database with the backend
+
 cors.
