@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import Particles from 'react-particles-js';
-import Navigation from './components/Navigation/Navigation';
-import Logo from './components/Logo/Logo';
-import Rank from './components/Rank/Rank';
-import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
-import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Signin from './components/Signin/Signin';
-import Register from './components/Register/Register';
 import './App.css';
+const Navigation = React.lazy(() => import('./components/Navigation/Navigation'));
+const Logo = React.lazy(() => import('./components/Logo/Logo'));
+const Rank = React.lazy(() => import('./components/Rank/Rank'));
+const ImageLinkForm = React.lazy(() => import('./components/ImageLinkForm/ImageLinkForm'));
+const FaceRecognition = React.lazy(() => import('./components/FaceRecognition/FaceRecognition'));
+
+const Register = React.lazy(() => import('./components/Register/Register'));
+
+
 
 const particlesOptions = {
 	"particles": {
@@ -117,21 +120,27 @@ class App extends Component {
     return(
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
-        <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
+        </Suspense>
         { route === 'home' 
           ? <div>
-              <Logo />
-              <Rank name={this.state.user.name} entries={this.state.user.entries}/>
-              <ImageLinkForm 
-                onInputChange={this.onInputChange} 
-                onButtonSubmit={this.onButtonSubmit}
-              />
-              <FaceRecognition boxes={boxes} imgUrl={imgUrl}/>
+              <Suspense fallback={<div>Loading...</div>}>
+                <section>
+                  <Logo />
+                  <Rank name={this.state.user.name} entries={this.state.user.entries}/>   
+                  <ImageLinkForm 
+                    onInputChange={this.onInputChange} 
+                    onButtonSubmit={this.onButtonSubmit}
+                  />
+                  <FaceRecognition boxes={boxes} imgUrl={imgUrl}/>
+                </section>
+              </Suspense>
             </div>
           : (
             route === 'signin' 
               ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} /> 
-              : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+              : <Suspense fallback={<div>Loading...</div>}><Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} /></Suspense>
           ) 
         }
       </div>
