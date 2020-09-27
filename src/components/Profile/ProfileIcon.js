@@ -15,7 +15,9 @@ const ProfileIcon = ({onRouteChange}) => {
                 <DropdownToggle tag="span" data-toggle="dropdown" aria-expanded={dropdownOpen}>
                     <img src="http://tachyons.io/img/logo.jpg" className="br-100 h3 w3 dib" alt="avatar" />
                 </DropdownToggle>
-                <DropdownMenu className="b--transparent shadow-5" style={{backgroundColor: 'rgba(255,255,255,0.7)'}}>
+                <DropdownMenu right
+                    className="b--transparent shadow-5" 
+                    style={{backgroundColor: 'rgba(255,255,255,0.7)', xPlacement: 'start-end'}}>
                     <DropdownItem >View Profile</DropdownItem>
                     <DropdownItem onClick={() => onRouteChange('signout')}>Signout</DropdownItem>
                 </DropdownMenu>
