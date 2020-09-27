@@ -7,7 +7,6 @@ const Logo = React.lazy(() => import('./components/Logo/Logo'));
 const Rank = React.lazy(() => import('./components/Rank/Rank'));
 const ImageLinkForm = React.lazy(() => import('./components/ImageLinkForm/ImageLinkForm'));
 const FaceRecognition = React.lazy(() => import('./components/FaceRecognition/FaceRecognition'));
-
 const Register = React.lazy(() => import('./components/Register/Register'));
 
 
@@ -26,8 +25,8 @@ const initialState = {
   input: '', 
   imgUrl: '',
   boxes: [],
-  route: 'signin',
-  isSignedIn: false,
+  route: 'home',
+  isSignedIn: true,
   user: {
     id: '',
     name: '',
