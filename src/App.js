@@ -142,7 +142,7 @@ class App extends Component {
               : <Suspense fallback={<div>Loading...</div>}><Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} /></Suspense>
           ) 
         }
-      </div>
+      </div> 
     )
   }
 }
