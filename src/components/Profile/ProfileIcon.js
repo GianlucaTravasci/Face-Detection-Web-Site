@@ -3,7 +3,7 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 
 import './ProfileIcon.css';
 
-const ProfileIcon = ({ onRouteChange }) => {
+const ProfileIcon = ({onRouteChange}) => {
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -16,7 +16,7 @@ const ProfileIcon = ({ onRouteChange }) => {
                     <img src="http://tachyons.io/img/logo.jpg" className="br-100 h3 w3 dib" alt="avatar" />
                 </DropdownToggle>
                 <DropdownMenu className="b--transparent shadow-5" style={{backgroundColor: 'rgba(255,255,255,0.7)'}}>
-                    <DropdownItem>View Profile</DropdownItem>
+                    <DropdownItem >View Profile</DropdownItem>
                     <DropdownItem onClick={() => onRouteChange('signout')}>Signout</DropdownItem>
                 </DropdownMenu>
             </Dropdown>
