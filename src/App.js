@@ -133,7 +133,7 @@ class App extends Component {
         <Suspense fallback={<div>Loading...</div>}>
           <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} toggleModal={this.toggleModal}/>
         </Suspense>
-        {isProfileOpen && <Suspense fallback={<div>Loading...</div>}><Modal><Profile user={this.state.user} isProfileOpen={isProfileOpen} toggleModal={this.toggleModal}></Profile></Modal></Suspense>}
+        {isProfileOpen && <Suspense fallback={<div>Loading...</div>}><Modal><Profile user={this.state.user} isProfileOpen={isProfileOpen} toggleModal={this.toggleModal} loadUser={this.loadUser}></Profile></Modal></Suspense>}
         { route === 'home' 
           ? <div>
               <Suspense fallback={<div>Loading...</div>}>
