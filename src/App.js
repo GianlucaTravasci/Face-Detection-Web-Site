@@ -9,6 +9,9 @@ const ImageLinkForm = React.lazy(() => import('./components/ImageLinkForm/ImageL
 const FaceRecognition = React.lazy(() => import('./components/FaceRecognition/FaceRecognition'));
 const Register = React.lazy(() => import('./components/Register/Register'));
 
+const Modal = React.lazy(() => import('./components/Modal/Modal'))
+const Profile = React.lazy(() => import('./components/Profile/Profile'))
+
 
 
 const particlesOptions = {
@@ -25,8 +28,9 @@ const initialState = {
   input: '', 
   imgUrl: '',
   boxes: [],
-  route: 'signin',
-  isSignedIn: false,
+  route: 'home',
+  isSignedIn: true,
+  isProfileOpen: true,
   user: {
     id: '',
     name: '',
@@ -114,14 +118,22 @@ class App extends Component {
     this.setState({route: route});
   }
 
+  toggleModal = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      isProfileOpen: !prevState.isProfileOpen
+    }))
+  }
+
   render() {
-    const { isSignedIn, route, boxes, imgUrl} = this.state;
+    const { isSignedIn, route, boxes, imgUrl, isProfileOpen} = this.state;
     return(
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
         <Suspense fallback={<div>Loading...</div>}>
-          <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
+          <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} toggleModal={this.toggleModal}/>
         </Suspense>
+        {isProfileOpen && <Suspense fallback={<div>Loading...</div>}><Modal><Profile isProfileOpen={isProfileOpen} toggleModal={this.toggleModal}></Profile></Modal></Suspense>}
         { route === 'home' 
           ? <div>
               <Suspense fallback={<div>Loading...</div>}>
