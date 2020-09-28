@@ -26,3 +26,5 @@ Bcrypt: for encrypt the passwords stored in the database
 knex: for connect the database with the backend
 
 cors.
+
+# WORK IN PROGRESS: ADDING SESSIONS WITH JWT
