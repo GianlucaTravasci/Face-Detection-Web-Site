@@ -10,15 +10,24 @@ const Profile = ({isProfileOpen, toggleModal}) => {
                     <h1>John Doe</h1>
                     <h4>Images submited: 5</h4>
                     <p>Member since: Jenuary</p>
-                    <div className="measure">
-                        <div className="mt3">
-                            <label className="db fw6 lh-copy f6" for="name">Name</label>
-                            <input  className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black" type="text" name="name"  id="name" />
-                        </div>
+                    <hr />
+                    <label className="mt2 fw6" htmlFor="user-name">Name</label>
+                    <input  
+                        className="pa2 ba w-100"
+                        placeholder="John" 
+                        type="text" 
+                        name="user-name"  
+                        id="name"
+                    />
+                    <div className="mt4" style={{display: 'flex', justifyContent: 'space-evenly'}}>
+                        <button className="b pa2 grow pointer hover-white w-40 bg-light-blue b--black-20">Save</button>
+                    </div>
+                    <div onClick={toggleModal} className="mt4" style={{display: 'flex', justifyContent: 'space-evenly'}}>
+                        <button className="b pa2 grow pointer hover-white w-40 bg-light-red b--black-20">Cancel</button>
                     </div>
                 </main>
+                <div className="modal-close pointer" onClick={toggleModal}>&times;</div>
             </article>
-            <button onClick={toggleModal}>Click</button>
         </div>
     )
 }
