@@ -1,20 +1,20 @@
 import React from 'react'
 import './Profile.css'
 
-const Profile = ({isProfileOpen, toggleModal}) => {
+const Profile = ({isProfileOpen, toggleModal, user}) => {
     return (
         <div className="profile-modal">
             <article className="br3 ba mv4 w-100 w-50-m w-25-l mw6 shadow-5 center" style={{backgroundColor: 'rgba(255,255,255,0.3)'}}>
                 <main className="pa4 black-80">
                     <img src="http://tachyons.io/img/logo.jpg" className="br-100 h3 w3 dib" alt="avatar" />
-                    <h1>John Doe</h1>
-                    <h4>Images submited: 5</h4>
-                    <p>Member since: Jenuary</p>
+                    <h1>{user.name}</h1>
+                    <h4>Images submited: {user.entries}</h4>
+                    <h6>Member since: {new Date(user.joined).toLocaleDateString()}</h6>
                     <hr />
                     <label className="mt2 fw6" htmlFor="user-name">Name</label>
                     <input  
                         className="pa2 ba w-100"
-                        placeholder="John" 
+                        placeholder={user.name}
                         type="text" 
                         name="user-name"  
                         id="name"
