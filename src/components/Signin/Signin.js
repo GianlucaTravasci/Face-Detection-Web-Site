@@ -1,4 +1,5 @@
 import React from 'react';
+import './Signin.css'
 
 class Signin extends React.Component {
     constructor(props) {
@@ -16,9 +17,13 @@ class Signin extends React.Component {
         this.setState({signInPassword: event.target.value})
     }
 
+    saveAuthTokenInSession = (token) => {
+        window.localStorage.setItem('token', token)
+    }
+
     onSubmitSignIn = () => {
         const { signInEmail, signInPassword } = this.state;
-        fetch('https://powerful-shelf-70165.herokuapp.com/signin', {
+        fetch('http://localhost:3000/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -27,10 +32,24 @@ class Signin extends React.Component {
             })
         })
             .then(response => response.json())
-            .then(user => {
-                if(user.id){
-                  this.props.loadUser(user);
-                  this.props.onRouteChange('home');
+            .then(data => {
+                if(data.userId && data.success === 'true'){
+                    this.saveAuthTokenInSession(data.token)
+                    fetch(`http://localhost:3000/profile/${data.userId}`, {
+                        method: 'get',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': data.token
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(user => {
+                        if(user){
+                            this.props.loadUser(user);
+                            this.props.onRouteChange('home');
+                        }
+                           
+                    })
                 }
             })
         
@@ -39,18 +58,18 @@ class Signin extends React.Component {
     render() {
         const { onRouteChange } = this.props;
         return(
-            <article className="br3 ba bg-near-white mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+            <article className="br3 ba  mv4 w-100 w-50-m w-25-l mw6 shadow-5 center" style={{backgroundColor: 'rgba(255,255,255,0.3)'}}>
                 <main className="pa4 black-80">
                     <div className="measure">
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                             <legend className="f1 fw6 ph0 mh0">Sign In</legend>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                                <input onChange={this.onEmailChange} className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address"  id="email-address" />
+                                <input onChange={this.onEmailChange} className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black" type="email" name="email-address"  id="email-address" />
                             </div>
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                                <input onChange={this.onPasswordChange} className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="password" name="password"  id="password" />
+                                <input onChange={this.onPasswordChange} className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black" type="password" name="password"  id="password" />
                             </div>
                         </fieldset>
                         <div className="">
