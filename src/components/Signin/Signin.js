@@ -30,8 +30,17 @@ class Signin extends React.Component {
             .then(response => response.json())
             .then(data => {
                 if(data.userId){
-                  this.props.loadUser(data);
-                  this.props.onRouteChange('home');
+                    fetch(`http://localhost:3000/profile/${data.userId}`, {
+                        method: 'get',
+                        headers: {'Content-Type': 'application/json'},
+                        mode: 'cors',
+                        cache: 'default'
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            this.props.loadUser(data);
+                        })
+                    this.props.onRouteChange('home');
                 }
             })
         
